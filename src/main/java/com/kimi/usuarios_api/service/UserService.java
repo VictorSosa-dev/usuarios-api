@@ -2,6 +2,8 @@ package com.kimi.usuarios_api.service;
 
 import org.springframework.stereotype.Service;
 
+import com.kimi.usuarios_api.dto.UsersDTO;
+import com.kimi.usuarios_api.mapper.UserMapper;
 import com.kimi.usuarios_api.model.Order;
 import com.kimi.usuarios_api.model.User;
 import com.kimi.usuarios_api.repository.UserRepository;
@@ -17,6 +19,15 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository repository;
+    private final UserMapper mapper;
+
+
+    public List<UsersDTO> obtenerUsersDTO() {
+        return repository.findAll()
+                .stream()
+                .map(mapper::toDTO)
+                .collect(Collectors.toList());
+    }
 
     public List<User> getOldUsers() {
         return repository.findAll()

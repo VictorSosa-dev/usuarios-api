@@ -2,6 +2,7 @@ package com.kimi.usuarios_api.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import com.kimi.usuarios_api.dto.UsersDTO;
 import com.kimi.usuarios_api.model.User;
 import com.kimi.usuarios_api.service.UserService;
 
@@ -15,6 +16,11 @@ import java.util.List;
 public class UserController {
 
     private final UserService service;
+
+     @GetMapping("/dto")
+    public List<UsersDTO> getUsuariosDTO() {
+        return service.obtenerUsersDTO();
+    }
 
     @GetMapping("/mayores")
     public List<User> getMayores() {
