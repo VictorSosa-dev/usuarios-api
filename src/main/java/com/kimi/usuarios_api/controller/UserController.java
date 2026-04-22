@@ -2,10 +2,12 @@ package com.kimi.usuarios_api.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import com.kimi.usuarios_api.dto.UserRequestDTO;
 import com.kimi.usuarios_api.dto.UsersDTO;
 import com.kimi.usuarios_api.model.User;
 import com.kimi.usuarios_api.service.UserService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -35,5 +37,10 @@ public class UserController {
     @GetMapping("/{id}")
     public User getById(@PathVariable Long id) {
         return service.getuserById(id);
+    }
+
+    @PostMapping
+    public User create(@RequestBody @Valid UserRequestDTO request) {
+        return service.createUser(request);
     }
 }

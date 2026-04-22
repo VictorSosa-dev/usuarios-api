@@ -2,6 +2,7 @@ package com.kimi.usuarios_api.service;
 
 import org.springframework.stereotype.Service;
 
+import com.kimi.usuarios_api.dto.UserRequestDTO;
 import com.kimi.usuarios_api.dto.UsersDTO;
 import com.kimi.usuarios_api.exception.UserNotFoundException;
 import com.kimi.usuarios_api.mapper.UserMapper;
@@ -48,5 +49,13 @@ public class UserService {
     public User getuserById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("Usuario no encontrado"));
+    }
+
+    public User createUser(UserRequestDTO request) {
+        User user = new User();
+        user.setName(request.getName());
+        user.setAge(request.getAge());
+        
+        return repository.save(user);
     }
 }
