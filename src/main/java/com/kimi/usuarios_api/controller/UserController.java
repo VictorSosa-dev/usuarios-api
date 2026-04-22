@@ -17,7 +17,7 @@ public class UserController {
 
     private final UserService service;
 
-     @GetMapping("/dto")
+    @GetMapping("/dto")
     public List<UsersDTO> getUsuariosDTO() {
         return service.obtenerUsersDTO();
     }

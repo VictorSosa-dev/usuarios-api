@@ -3,6 +3,7 @@ package com.kimi.usuarios_api.service;
 import org.springframework.stereotype.Service;
 
 import com.kimi.usuarios_api.dto.UsersDTO;
+import com.kimi.usuarios_api.exception.UserNotFoundException;
 import com.kimi.usuarios_api.mapper.UserMapper;
 import com.kimi.usuarios_api.model.Order;
 import com.kimi.usuarios_api.model.User;
@@ -46,6 +47,6 @@ public class UserService {
 
     public User getuserById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User no encontrado"));
+                .orElseThrow(() -> new UserNotFoundException("Usuario no encontrado"));
     }
 }
