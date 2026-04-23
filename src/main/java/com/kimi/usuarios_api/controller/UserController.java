@@ -1,5 +1,6 @@
 package com.kimi.usuarios_api.controller;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import com.kimi.usuarios_api.dto.UserRequestDTO;
@@ -42,5 +43,13 @@ public class UserController {
     @PostMapping
     public User create(@RequestBody @Valid UserRequestDTO request) {
         return service.createUser(request);
+    }
+
+    @GetMapping
+    public Page<UsersDTO> getUsuarios(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
+
+        return service.getUsersWithPagination(page, size);
     }
 }

@@ -1,5 +1,6 @@
 package com.kimi.usuarios_api.service;
 
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import com.kimi.usuarios_api.dto.UserRequestDTO;
@@ -57,5 +58,11 @@ public class UserService {
         user.setAge(request.getAge());
         
         return repository.save(user);
+    }
+
+    public Page<UsersDTO> getUsersWithPagination(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+        return repository.findAll(pageable)
+                .map(mapper::toDTO);
     }
 }
